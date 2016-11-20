@@ -1,0 +1,65 @@
+The Challenge
+=============
+
+The dataset below contains locations of filming in movies in the San Francisco Bay Area.
+
+* title
+* release year
+* location
+* fun facts
+* production company
+* distributor
+* director
+* writer
+* actor 1
+* actor 2
+* actor 3
+
+Could you think of an interesting, interactive experience around that data?
+
+https://data.sfgov.org/Culture-and-Recreation/Film-Locations-in-San-Francisco/yitu-d5am
+
+For bonus points, feel free to use an external data source that outlines other interesting aspects related to this dataset (i.e, SF Geographical Boundaries, Movie Ratings, Box Office Numbers or whatever you find interesting).
+
+When done, please send a Github/Bitbucket link and hosted app link. We will then review and find a day where you can present the code, followed by a technical interview.  
+
+Ideas
+-----
+
+External datasources:
+
+* IMDB for movie rating
+* Yandex.Maps for coordinates
+* tumblr for related images
+* twitter for related tweets
+
+Visualisations:
+
+* place location pins on a map
+* spread movies across a timeline
+* provide slices by director/actor/whatever
+* fix spellings
+* augmented reality on google.panorams
+
+Mockup
+------
+
+* choose movie
+* movie card: photo, info, places,
+* places lead to panoramas
+
+TODO
+----
+
+deploy
+get data from source
+agressive caching
+sw
+pre-geocode and get coordinates
+auto-zoom the map
+draw bars (num of movies per year) above the range
+movie label on pin
+movie card on click
+refactor to components
+web-components
+optimize from mobile
