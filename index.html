@@ -113,7 +113,7 @@
       }
 
       function fetchLocations() {
-        return fetch('/data/film-locations.json')
+        return fetch('data/film-locations.json')
           .then(res => res.json())
           .then(locationsFromJson);
       }
