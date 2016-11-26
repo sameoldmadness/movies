@@ -14,12 +14,12 @@ customElements.define('x-range', class extends HTMLElement {
 
     val = x.inBounds(val, min, max);
 
-    this.$.value.textContent = val
+    this.$.value.textContent = val;
     this.setAttribute('value', val);
   }
 
   _initShadowDom() {
-    const shadowRoot = this.attachShadow({mode: 'open'});
+    const shadowRoot = this.attachShadow({ mode: 'open' });
     const template = document.querySelector('#x-range-template');
     const instance = template.content.cloneNode(true);
 

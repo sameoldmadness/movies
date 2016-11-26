@@ -35,7 +35,7 @@ customElements.define('x-map', class extends HTMLElement {
   }
 
   _initShadowDom() {
-    const shadowRoot = this.attachShadow({mode: 'open'});
+    const shadowRoot = this.attachShadow({ mode: 'open' });
     const template = document.querySelector('#x-map-template');
     const instance = template.content.cloneNode(true);
 
@@ -46,7 +46,7 @@ customElements.define('x-map', class extends HTMLElement {
     const mapEl = this.shadowRoot.querySelector('#map');
 
     return new google.maps.Map(mapEl, {
-      center: {lat: 37.8008245, lng: -122.4533048},
+      center: { lat: 37.8008245, lng: -122.4533048 },
       zoom: 12,
     });
   }
@@ -68,7 +68,7 @@ customElements.define('x-map', class extends HTMLElement {
 
   _addMarkers(locations) {
     return this._mapReady.promise.then(map => {
-      locations.forEach(({position, title}) => {
+      locations.forEach(({ position, title }) => {
         const marker = new google.maps.Marker({ position, map, title });
 
         this._markers.push(marker);
@@ -106,12 +106,10 @@ customElements.define('x-map', class extends HTMLElement {
     return new Promise((resolve, reject) => {
       const geocoder = new google.maps.Geocoder();
 
-      geocoder.geocode({address}, (results, status) => {
-        if (status === google.maps.GeocoderStatus.OK) {
-          resolve(results[0]);
-        } else {
-          resolve('');
-        }
+      geocoder.geocode({ address }, (results, status) => {
+        const position = status === google.maps.GeocoderStatus.OK ? results[0] : '';
+
+        resolve(position);
       });
     });
   }
