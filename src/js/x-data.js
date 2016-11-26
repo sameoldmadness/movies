@@ -4,7 +4,7 @@ customElements.define('x-data', class extends HTMLElement {
   }
 
   _fetchPayload() {
-    fetch('data/film-locations.json')
+    fetch('https://data.sfgov.org/resource/wwmu-gmzc.json')
       .then(res => res.json())
       .then(this._locationsFromJson)
       .then(locations => {
@@ -14,16 +14,11 @@ customElements.define('x-data', class extends HTMLElement {
   }
 
   _locationsFromJson(json) {
-    const whitelist = ['title', 'releaseYear', 'locations', 'actor1', 'actor2', 'funFacts'];
-    const columns = json.meta.view.columns.map(x => x.name);
-
-    return json.data.map(row => {
-      return columns.reduce((location, name, index) => {
+    return json.map(row => {
+      return Object.keys(row).reduce((location, name) => {
         const key = x.str.camelize(name);
 
-        if (whitelist.includes(key)) {
-          location[key] = row[index];
-        }
+        location[key] = row[name];
 
         return location;
       }, {});
