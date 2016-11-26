@@ -35,6 +35,48 @@ x.throttle = (fn, threshhold, scope) => {
   };
 };
 
+/**
+ * @copyright wbinnssmith
+ */
+x.Deferred = function Deferred() {
+  this.promise = new Promise((resolve, reject) => {
+    this.resolve = resolve;
+    this.reject = reject;
+  });
+};
+
 x.inBounds = (val, min, max) => {
   return Math.max(Math.min(val, max), min);
+};
+
+x.jsonp = {};
+
+x.jsonp.register = fn => {
+  const name = `jsonp${Math.random()}`.replace('.', '');
+
+  window[name] = fn;
+
+  return name;
+};
+
+x.jsonp.clear = name => {
+  window[name] = null;
+};
+
+x.str = {};
+
+x.str.ucFirst = str => {
+  return str[0].toUpperCase() + str.slice(1);
+};
+
+x.str.lcFirst = str => {
+  return str[0].toLowerCase() + str.slice(1);
+};
+
+x.str.camelize = str => {
+  return x.str.lcFirst(str
+    .replace(/\s/g, '')
+    .split('_')
+    .map(x.str.ucFirst)
+    .join(''));
 };

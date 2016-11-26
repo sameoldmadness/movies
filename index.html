@@ -8,6 +8,7 @@
 <body>
   <script defer src="src/js/utils.js"></script>
   <script defer src="src/js/x-app.js"></script>
+  <script defer src="src/js/x-data.js"></script>
   <script defer src="src/js/x-map.js"></script>
   <script defer src="src/js/x-range.js"></script>
 
@@ -57,13 +58,14 @@
         height: var(--toast-height);
       }
     </style>
-    <div id="value" hidden>1982</div>
+    <div id="value" hidden></div>
     <div id="range"></div>
   </template>
 
   <x-app>
+    <x-data></x-data>
     <x-map key="AIzaSyCRaKUp6sm9VfGKfEimJhMg5aNIykXyW-Y"></x-map>
-    <x-range from="1930" to="2016"></x-range>
+    <x-range from="1930" to="2016" value="1982"></x-range>
   </x-app>
 </body>
 </html>

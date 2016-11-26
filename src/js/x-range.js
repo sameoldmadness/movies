@@ -1,18 +1,21 @@
-document.registerElement('x-range', class extends HTMLElement {
-  attachedCallback() {
+customElements.define('x-range', class extends HTMLElement {
+  connectedCallback() {
     this._initShadowDom();
     this._initEvents();
   }
 
   get value() {
-    return parseInt(this.$.value.textContent, 10);
+    return parseInt(this.getAttribute('value'), 10);
   }
 
   set value(val) {
     const min = this.getAttribute('from');
     const max = this.getAttribute('to');
 
-    this.$.value.textContent = x.inBounds(val, min, max);
+    val = x.inBounds(val, min, max);
+
+    this.$.value.textContent = val
+    this.setAttribute('value', val);
   }
 
   _initShadowDom() {
@@ -53,7 +56,7 @@ document.registerElement('x-range', class extends HTMLElement {
   _leaveEditMode() {
     this.$.value.setAttribute('hidden', '');
     this._x = null;
-    this.dispatchEvent(new CustomEvent('change', { value: this.value }));
+    this.dispatchEvent(new CustomEvent('change'));
   }
 
   _updateValue(x) {
