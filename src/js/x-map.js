@@ -44,22 +44,19 @@ customElements.define('x-map', class extends HTMLElement {
 
   _makeMap() {
     const mapEl = this.shadowRoot.querySelector('#map');
-    const map = new google.maps.Map(mapEl, {
+
+    return new google.maps.Map(mapEl, {
       center: { lat: 37.8008245, lng: -122.4533048 },
       zoom: 12,
-
-      // mapTypeId: google.maps.MapTypeId.HYBRID,
-
       disableDefaultUI: true,
     });
-
-    map.setTilt(45);
 
     return map;
   }
 
   _onReady() {
     this._markers = [];
+    this._infowindows = [];
 
     this._mapReady.resolve(this._makeMap());
   }
@@ -75,10 +72,31 @@ customElements.define('x-map', class extends HTMLElement {
 
   _addMarkers(locations) {
     return this._mapReady.promise.then(map => {
-      locations.forEach(({ position, title }) => {
+      locations.forEach(({ position, title, actor1, actor2, funFacts, locations, releaseYear }) => {
         const marker = new google.maps.Marker({ position, map, title });
 
+        const infowindow = new google.maps.InfoWindow({
+          content: `
+            <h3>${locations}</h3>
+            <p>${[actor1, actor2].join(' and ')} in "${title}".</p>
+            <p>${funFacts || ''}</p>
+          `,
+          maxWidth: 200
+        });
+
+        marker.addListener('click', _ => {
+          const isOpened = Boolean(infowindow._opened);
+
+          this._closeInfowindows();
+
+          if (!isOpened) {
+            infowindow.open(map, marker);
+            infowindow._opened = true;
+          }
+        });
+
         this._markers.push(marker);
+        this._infowindows.push(infowindow);
       });
     });
   }
@@ -86,6 +104,16 @@ customElements.define('x-map', class extends HTMLElement {
   _clearMarkers() {
     this._markers.forEach(marker => marker.setMap(null));
     this._markers = [];
+
+    this._closeInfowindows();
+    this._infowindows = [];
+  }
+
+  _closeInfowindows() {
+    this._infowindows.forEach(infowindow => {
+      infowindow.close();
+      infowindow._opened = false;
+    });
   }
 
   _getLocationsByYear(year) {

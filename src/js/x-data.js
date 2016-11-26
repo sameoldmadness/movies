@@ -14,7 +14,7 @@ customElements.define('x-data', class extends HTMLElement {
   }
 
   _locationsFromJson(json) {
-    const whitelist = ['title', 'releaseYear', 'locations'];
+    const whitelist = ['title', 'releaseYear', 'locations', 'actor1', 'actor2', 'funFacts'];
     const columns = json.meta.view.columns.map(x => x.name);
 
     return json.data.map(row => {
