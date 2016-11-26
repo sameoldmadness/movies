@@ -1,0 +1,14 @@
+{
+  "name": "Where Is My Movies",
+  "short_name": "whrsmmovies?!",
+  "icons": [{
+      "src": "images/192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }],
+  "start_url": "/",
+  "background_color": "#BADA55",
+  "orientation": "portrait",
+  "display": "standalone",
+  "theme_color": "#BADA55"
+}

@@ -1,6 +1,7 @@
 customElements.define('x-app', class extends HTMLElement {
   connectedCallback() {
     this._initEvents();
+    this._registerServiceWorker();
   }
 
   _initEvents() {
@@ -15,5 +16,9 @@ customElements.define('x-app', class extends HTMLElement {
     range.addEventListener('change', _ => {
       map.setAttribute('year', range.getAttribute('value'));
     });
+  }
+
+  _registerServiceWorker() {
+    navigator.serviceWorker.register('/sw.js');
   }
 });
