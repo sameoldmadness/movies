@@ -8,7 +8,7 @@ customElements.define('x-map', class extends HTMLElement {
     const callback = x.jsonp.register(_ => {
       this._onReady();
       x.jsonp.clear(callback);
-    });
+    }, 'xmap');
 
     x.loadScript(this._makeUrl(callback));
   }

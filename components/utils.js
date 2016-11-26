@@ -51,8 +51,8 @@ x.inBounds = (val, min, max) => {
 
 x.jsonp = {};
 
-x.jsonp.register = fn => {
-  const name = `jsonp${Math.random()}`.replace('.', '');
+x.jsonp.register = (fn, suffix = String(Math.random()).slice(2)) => {
+  const name = `jsonp${suffix}`.replace('.', '');
 
   window[name] = fn;
 
