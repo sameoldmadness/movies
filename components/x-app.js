@@ -19,6 +19,6 @@ customElements.define('x-app', class extends HTMLElement {
   }
 
   _registerServiceWorker() {
-    navigator.serviceWorker.register('/sw.js');
+    navigator.serviceWorker.register('sw.js');
   }
 });
