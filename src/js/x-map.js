@@ -44,11 +44,18 @@ customElements.define('x-map', class extends HTMLElement {
 
   _makeMap() {
     const mapEl = this.shadowRoot.querySelector('#map');
-
-    return new google.maps.Map(mapEl, {
+    const map = new google.maps.Map(mapEl, {
       center: { lat: 37.8008245, lng: -122.4533048 },
       zoom: 12,
+
+      // mapTypeId: google.maps.MapTypeId.HYBRID,
+
+      disableDefaultUI: true,
     });
+
+    map.setTilt(45);
+
+    return map;
   }
 
   _onReady() {

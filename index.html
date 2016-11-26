@@ -32,12 +32,12 @@
   <template id="x-range-template">
     <style>
       :host {
+        pointer-events: none;
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-
         --toast-height: 100px;
       }
       #value {
@@ -53,6 +53,7 @@
         visibility: hidden;
       }
       #range {
+        pointer-events: all;
         background: white;
         opacity: .7;
         height: var(--toast-height);
